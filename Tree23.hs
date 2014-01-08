@@ -77,3 +77,20 @@ insert t kv = let res = insertCore t kv
 			then fst res
 			else let (newkv, newTree) = fromJust $ snd res
 				in Node2 newkv (fst res) newTree
+
+--mergeLine :: String -> String -> String
+--mergeLine a [] = a
+--mergeLine [] b = []
+
+drawTreeCore :: (Show k, Show v) => (Tree23 k v) -> (Int,[Char])
+drawTreeCore Empty = (0,[])
+drawTreeCore (Node2 (k,v) left right) =
+	let	(leftWidth, leftString)	= drawTreeCore left
+		(rightWidth,rightString)= drawTreeCore right
+		hereString		= show (k,v)
+		rightIndent		= 2 + $ max (length hereString) leftWidth
+		rightString'		= lines $ map (take rightIndent $ repeat ' ') $ unlines rightString
+		left
+
+
+drawTree :: (Show k, Show v) => (Tree23 k v) -> [Char]
